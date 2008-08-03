@@ -1,3 +1,4 @@
+import wns.evaluation.default
 import wns.WNS
 import wns.Node
 import rise.Mobility
@@ -33,5 +34,5 @@ for ii in xrange(50):
     WNS.nodes.append( Car("Car" + str(ii), aMobility) )
     WNS.nodes[-1].mobility.mobility.userVelocityDist.mean = 30
 
-
+wns.evaluation.default.installEvaluation(WNS)
 

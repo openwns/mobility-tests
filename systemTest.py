@@ -11,19 +11,17 @@ import pywns.WNSUnit
 testSuite = pywns.WNSUnit.TestSuite()
 
 # create a system test
-roadMapTest = pywns.WNSUnit.ProbesTestSuite(sandboxPath = os.path.join('..', '..', '..', 'sandbox'),
+roadMapTest = pywns.WNSUnit.SystemTestSuite(sandboxPath = os.path.join('..', '..', '..', 'sandbox'),
                                             executeable = "wns-core",
                                             configFile = 'roadMapFromFile.py',
                                             shortDescription = 'Mobility components from RISE (Roadmap mobility)',
-                                            requireReferenceOutput = False,
                                             disabled = False,
                                             disabledReason = "")
 
-manhattanTest = pywns.WNSUnit.ProbesTestSuite(sandboxPath = os.path.join('..', '..', '..', 'sandbox'),
+manhattanTest = pywns.WNSUnit.SystemTestSuite(sandboxPath = os.path.join('..', '..', '..', 'sandbox'),
                                               executeable = "wns-core",
                                               configFile = 'config.py',
                                               shortDescription = 'Mobility components from RISE (Manhattan mobility)',
-                                              requireReferenceOutput = False,
                                               disabled = False,
                                               disabledReason = "")
 
