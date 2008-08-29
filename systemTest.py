@@ -25,14 +25,24 @@ manhattanTest = pywns.WNSUnit.SystemTestSuite(sandboxPath = os.path.join('..', '
                                               disabled = False,
                                               disabledReason = "")
 
+ownRNGTest = pywns.WNSUnit.ProbesTestSuite(sandboxPath = os.path.join('..', '..', '..', 'sandbox'),
+                                            executeable = "wns-core",
+                                            configFile = 'configOwnRNG.py',
+                                            shortDescription = 'Testing mobility RNGs',
+                                            runSimulations = True,
+                                            disabled = False,
+                                            disabledReason = "")
+
+
 testSuite.addTest(roadMapTest)
 testSuite.addTest(manhattanTest)
+testSuite.addTest(ownRNGTest)
 
 if __name__ == '__main__':
     # This is only evaluated if the script is called by hand
 
     # if you need to change the verbosity do it here
-    verbosity = 1
+    verbosity = 2
 
     pywns.WNSUnit.verbosity = verbosity
 

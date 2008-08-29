@@ -1,0 +1,4 @@
+id, name
+./referenceOutput_configOwnRNG.py, REFERENCE
+./output_dbg_configOwnRNG.py, DBG
+./output_opt_configOwnRNG.py, OPT
