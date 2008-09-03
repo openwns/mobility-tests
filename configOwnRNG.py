@@ -66,7 +66,6 @@ node = openwns.evaluation.createSourceNode(WNS, sourceName)
 node.appendChildren(Separate(by = 'wns.node.Node.id', 
     forAll = xrange(numCars), 
     format="wns.node.Node.id%d"))
-node.getLeafs().appendChildren(TimeSeries()) 
 node.getLeafs().appendChildren(Moments())
 
 sourceName = 'rise.scenario.mobility.PositionY'
@@ -74,6 +73,5 @@ node = openwns.evaluation.createSourceNode(WNS, sourceName)
 node.appendChildren(Separate(by = 'wns.node.Node.id', 
     forAll = xrange(numCars), 
     format="wns.node.Node.id%d"))
-node.getLeafs().appendChildren(TimeSeries()) 
 node.getLeafs().appendChildren(Moments())
 
