@@ -64,14 +64,14 @@ WNS.nodes[4].mobility.mobility.userVelocityDist = wns.Distribution.StandardUnifo
 sourceName = 'rise.scenario.mobility.PositionX'
 node = openwns.evaluation.createSourceNode(WNS, sourceName)
 node.appendChildren(Separate(by = 'wns.node.Node.id', 
-    forAll = xrange(numCars), 
+    forAll = xrange(1, numCars), 
     format="wns.node.Node.id%d"))
 node.getLeafs().appendChildren(Moments())
 
 sourceName = 'rise.scenario.mobility.PositionY'
 node = openwns.evaluation.createSourceNode(WNS, sourceName)
 node.appendChildren(Separate(by = 'wns.node.Node.id', 
-    forAll = xrange(numCars), 
+    forAll = xrange(1, numCars), 
     format="wns.node.Node.id%d"))
 node.getLeafs().appendChildren(Moments())
 
