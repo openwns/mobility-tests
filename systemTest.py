@@ -12,21 +12,21 @@ testSuite = pywns.WNSUnit.TestSuite()
 
 # create a system test
 roadMapTest = pywns.WNSUnit.SystemTestSuite(sandboxPath = os.path.join('..', '..', '..', 'sandbox'),
-                                            executeable = "wns-core",
+                                            
                                             configFile = 'roadMapFromFile.py',
                                             shortDescription = 'Mobility components from RISE (Roadmap mobility)',
                                             disabled = False,
                                             disabledReason = "")
 
 manhattanTest = pywns.WNSUnit.SystemTestSuite(sandboxPath = os.path.join('..', '..', '..', 'sandbox'),
-                                              executeable = "wns-core",
+                                              
                                               configFile = 'config.py',
                                               shortDescription = 'Mobility components from RISE (Manhattan mobility)',
                                               disabled = False,
                                               disabledReason = "")
 
 ownRNGTest = pywns.WNSUnit.ProbesTestSuite(sandboxPath = os.path.join('..', '..', '..', 'sandbox'),
-                                            executeable = "wns-core",
+                                            
                                             configFile = 'configOwnRNG.py',
                                             shortDescription = 'Testing mobility RNGs',
                                             runSimulations = True,
