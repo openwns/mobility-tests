@@ -1,18 +1,18 @@
 from openwns.evaluation import *
 import openwns.rng
-import wns.WNS
-import wns.Node
-import wns.Distribution
+import openwns
+import openwns.node
+import openwns.distribution
 import rise.Mobility
 import rise.Roadmap
 import rise.scenario.Manhattan
-import constanze.Constanze
-import constanze.Node
+import constanze.traffic
+import constanze.node
 
-WNS = wns.WNS.WNS()
+WNS = openwns.Simulator(simulationModel = openwns.node.NodeSimulationModel())
 WNS.maxSimTime = 20.0
 WNS.modules.rise.debug.main = True
-WNS.outputStrategy = wns.WNS.OutputStrategy.DELETE
+WNS.outputStrategy = openwns.simulator.OutputStrategy.DELETE
 
 # The global generator uses a random seed, the traffic will therefore variate
 # for every run
@@ -24,7 +24,7 @@ WNS.modules.rise.ownMobilityRNG = openwns.rng.RNG(useRandomSeed = False)
 
 numCars = 5
 
-class Car(wns.Node.Node):
+class Car(openwns.node.Node):
     mobility = None
     load = None
 
@@ -33,10 +33,10 @@ class Car(wns.Node.Node):
         self.mobility = rise.Mobility.Component(self,
                                                 "Mobility Component",
                                                 mobility)
-        self.load = constanze.Node.ConstanzeComponent(self, "carGen")
+        self.load = constanze.node.ConstanzeComponent(self, "carGen")
         
-        bindingStub = constanze.Node.BindingStub()
-        traffic = constanze.Constanze.Poisson(0.1, 1E6, 1024)
+        bindingStub = constanze.node.BindingStub()
+        traffic = constanze.traffic.Poisson(0.1, 1E6, 1024)
         self.load.addTraffic(bindingStub, traffic)
                                                 
 # Manhattan scenario
@@ -52,13 +52,13 @@ myManhattan = rise.scenario.Manhattan.Manhattan(rows=10,
 aMobility = rise.Mobility.Roadmap("testMobility", myManhattan.streets, myManhattan.crossings)
 
 for ii in xrange(numCars):
-    WNS.nodes.append( Car("Car" + str(ii), aMobility) )
+    WNS.simulationModel.nodes.append( Car("Car" + str(ii), aMobility) )
 
-WNS.nodes[0].mobility.mobility.userVelocityDist = wns.Distribution.Uniform(45.0, 55.0)
-WNS.nodes[1].mobility.mobility.userVelocityDist = wns.Distribution.Normal(50.0, 15.0)
-WNS.nodes[2].mobility.mobility.userVelocityDist = wns.Distribution.Erlang(1.0 / 50.0, 1)
-WNS.nodes[3].mobility.mobility.userVelocityDist = wns.Distribution.Poisson(50.0)
-WNS.nodes[4].mobility.mobility.userVelocityDist = wns.Distribution.StandardUniform() + 50.0
+WNS.simulationModel.nodes[0].mobility.mobility.userVelocityDist = openwns.distribution.Uniform(45.0, 55.0)
+WNS.simulationModel.nodes[1].mobility.mobility.userVelocityDist = openwns.distribution.Normal(50.0, 15.0)
+WNS.simulationModel.nodes[2].mobility.mobility.userVelocityDist = openwns.distribution.Erlang(1.0 / 50.0, 1)
+WNS.simulationModel.nodes[3].mobility.mobility.userVelocityDist = openwns.distribution.Poisson(50.0)
+WNS.simulationModel.nodes[4].mobility.mobility.userVelocityDist = openwns.distribution.StandardUniform() + 50.0
 
 
 sourceName = 'rise.scenario.mobility.PositionX'
@@ -75,3 +75,4 @@ node.appendChildren(Separate(by = 'wns.node.Node.id',
     format="wns.node.Node.id%d"))
 node.getLeafs().appendChildren(Moments())
 
+openwns.setSimulator(WNS)
