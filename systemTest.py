@@ -1,9 +1,13 @@
 #! /usr/bin/env python
 
+# this is needed, so that the script can be called from everywhere
 import os
+import sys
+base, tail = os.path.split(sys.argv[0])
+os.chdir(base)
 
-# set path to WNS
-import wnsrc
+# Append the python sub-dir of WNS--main--x.y ...
+sys.path.append(os.path.join('..', '..', '..', 'sandbox', 'default', 'lib', 'python2.4', 'site-packages'))
 
 # ... because the module WNS unit test framework is located there.
 import pywns.WNSUnit
